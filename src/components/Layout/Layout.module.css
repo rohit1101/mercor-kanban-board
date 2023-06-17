@@ -1,0 +1,8 @@
+.layout {
+  max-width: 100%;
+  display: flex;
+}
+
+.layout__child {
+  flex-basis: 80%;
+}
