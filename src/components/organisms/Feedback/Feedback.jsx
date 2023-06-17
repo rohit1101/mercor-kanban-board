@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Feedback.module.css";
-import Bulb from "../../assets/lamp-on.svg";
+import Bulb from "../../../assets/lamp-on.svg";
 
 function Feedback() {
   return (
