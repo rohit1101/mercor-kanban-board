@@ -1,13 +1,13 @@
 .sidebar {
-  flex-basis: 20%;
-  padding-block: 32px;
+  flex-basis: 15%;
+  padding-block: 12px;
   border-right-color: #dbdbdb;
   border-right-width: 1px;
   border-right-style: solid;
 }
 
 .sidebar__header {
-  padding-bottom: 32px;
+  padding-bottom: 12px;
   padding-inline: 22px;
 }
 
@@ -22,7 +22,7 @@
   height: 1px;
   border: 0 none;
   background-color: #dbdbdb;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .sidebar__nav-items {
@@ -50,13 +50,85 @@
 }
 
 .sidebar__projects {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding-left: 22px;
   padding-right: 24px;
   text-transform: uppercase;
   font-weight: 800;
   font-size: 12px;
   color: #787486;
+}
+
+.sidebar__project {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #787486;
+  padding: 10px 6px;
+  transition: all 0.4s;
+}
+
+.sidebar__project:hover {
+  color: #0d062d;
+  font-weight: 600;
+  background-color: rgba(80, 48, 229, 0.08);
+  border-radius: 6px;
+}
+
+.sidebar__project:hover .sidebar__project-right {
+  display: block;
+}
+
+.sidebar__projects-heading {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  justify-content: space-between;
+}
+
+.sidebar__project-left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: none;
+}
+
+.sidebar__project-right {
+  display: none;
+  font-weight: 900;
+  color: #000;
+  position: relative;
+  bottom: 4px;
+}
+
+.sidebar__projects_status {
+  width: 8px;
+  height: 8px;
+}
+
+.sidebar__projects_status--green {
+  background-color: #7ac555;
+  border-radius: 50%;
+}
+
+.sidebar__projects_status--orange {
+  background-color: #ffa500;
+  border-radius: 50%;
+}
+
+.sidebar__projects_status--violet {
+  background-color: #e4ccfd;
+  border-radius: 50%;
+}
+
+.sidebar__projects_status--blue {
+  background-color: #76a5ea;
+  border-radius: 50%;
+}
+
+.sidebar__feedback {
+  margin-top: 30px;
+  padding: 22px;
 }

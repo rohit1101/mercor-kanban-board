@@ -35,12 +35,30 @@ function Sidebar() {
         className={`${styles["sidebar__hr"]} ${styles["sidebar__hr-spacing"]}`}
       />
       <div className={styles["sidebar__projects"]}>
-        <p>My projects</p>
-        <span>
-          <img src={Project} alt="projects-icon" />
-        </span>
+        <div className={styles["sidebar__projects-heading"]}>
+          <p>My projects</p>
+          <span>
+            <img src={Project} alt="projects-icon" />
+          </span>
+        </div>
+
+        {Static.sideBarProjects.map((project) => (
+          <div key={project.id} className={styles["sidebar__project"]}>
+            <div className={styles["sidebar__project-left"]}>
+              <div
+                className={`${styles["sidebar__projects_status"]} ${
+                  styles[`sidebar__projects_status--${project.status}`]
+                }`}
+              />
+              <p>{project.title}</p>
+            </div>
+            <p className={styles["sidebar__project-right"]}>. . .</p>
+          </div>
+        ))}
       </div>
-      <Feedback />
+      <div className={styles["sidebar__feedback"]}>
+        <Feedback />
+      </div>
     </div>
   );
 }
