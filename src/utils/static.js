@@ -13,6 +13,12 @@ const Static = {
     { id: 4, icon: Members, title: "Members", alt: "members-icon" },
     { id: 5, icon: Settings, title: "Settings", alt: "settings-icon" },
   ],
+  sideBarProjects: [
+    { id: 6, title: "Mobile App", status: "green" },
+    { id: 7, title: "Website Redesign", status: "orange" },
+    { id: 8, title: "Design System", status: "violet" },
+    { id: 9, title: "Wireframes", status: "blue" },
+  ],
 };
 
 export default Static;
