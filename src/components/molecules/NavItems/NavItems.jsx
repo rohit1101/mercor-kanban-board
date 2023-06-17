@@ -3,7 +3,6 @@ import styles from "./NavItems.module.css";
 
 function NavItems(props) {
   const { icon, text = "", alt = "" } = props;
-  console.log(props.className, styles);
   return (
     <div className={`${styles["navitems"]} ${props.className}`}>
       <span>

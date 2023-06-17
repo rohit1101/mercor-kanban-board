@@ -5,6 +5,7 @@ import NavItems from "../../molecules/NavItems/NavItems";
 import CompanyLogo from "../../../assets/company-logo.svg";
 import Static from "../../../utils/static";
 import Project from "../../../assets/add-square.svg";
+import Divider from "../../atoms/Divider/Divider";
 
 function Sidebar() {
   return (
@@ -17,7 +18,7 @@ function Sidebar() {
           className={styles["sidebar_heading-gap"]}
         />
       </div>
-      <hr className={styles["sidebar__hr"]} />
+      <Divider />
       <div className={styles["sidebar__nav-items"]}>
         {Static.sideBarNavItems.map((navItem) => (
           <NavItems
@@ -31,9 +32,7 @@ function Sidebar() {
           />
         ))}
       </div>
-      <hr
-        className={`${styles["sidebar__hr"]} ${styles["sidebar__hr-spacing"]}`}
-      />
+      <Divider spacing />
       <div className={styles["sidebar__projects"]}>
         <div className={styles["sidebar__projects-heading"]}>
           <p>My projects</p>
