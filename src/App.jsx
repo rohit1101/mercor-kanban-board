@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import WebFont from "webfontloader";
 import Layout from "./components/Layout/Layout";
+import Topbar from "./components/organisms/Topbar/Topbar";
 
 function App() {
   useEffect(() => {
@@ -11,7 +12,14 @@ function App() {
     });
   }, []);
 
-  return <Layout>Content</Layout>;
+  return (
+    <Layout>
+      <Topbar />
+      <p>Content header</p>
+      <p>Filters and Share</p>
+      <p>Cards</p>
+    </Layout>
+  );
 }
 
 export default App;

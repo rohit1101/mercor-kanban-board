@@ -4,6 +4,9 @@ import Messages from "../assets/message.svg";
 import Tasks from "../assets/task-square.svg";
 import Settings from "../assets/setting-2.svg";
 import Members from "../assets/profile-2user.svg";
+import Calendar from "../assets/calendar-2.svg";
+import MessageQuestion from "../assets/message-question.svg";
+import Notification from "../assets/notification.svg";
 
 const Static = {
   sideBarNavItems: [
@@ -18,6 +21,11 @@ const Static = {
     { id: 7, title: "Website Redesign", status: "orange" },
     { id: 8, title: "Design System", status: "violet" },
     { id: 9, title: "Wireframes", status: "blue" },
+  ],
+  topBarNavItems: [
+    { id: 10, icon: Calendar, title: "", alt: "calendar-icon" },
+    { id: 11, icon: MessageQuestion, title: "", alt: "messages-question-icon" },
+    { id: 12, icon: Notification, title: "", alt: "notification-icon" },
   ],
 };
 
