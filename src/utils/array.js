@@ -1,17 +1,19 @@
-import { arrayMove as dndKitArrayMove } from "@dnd-kit/sortable";
-
-export const removeAtIndex = (array, idx) => {
-  const firstHalf = array.slice(0, idx);
-  const secondHalf = array.slice(idx + 1);
-  return firstHalf.concat(secondHalf);
-};
-
-export const insertAtIndex = (array, item, idx) => [
-  ...array.slice(0, idx),
-  item,
-  ...array.slice(idx),
+const itemsForCol = [
+  { id: crypto.randomUUID(), content: "Task 1" },
+  { id: crypto.randomUUID(), content: "Task 2" },
 ];
 
-export const arrayMove = (array, oldIdx, newIdx) => {
-  return dndKitArrayMove(array, oldIdx, newIdx);
+export const cols = {
+  [crypto.randomUUID()]: {
+    name: "Todo",
+    items: itemsForCol,
+  },
+  [crypto.randomUUID()]: {
+    name: "In Progress",
+    items: [],
+  },
+  [crypto.randomUUID()]: {
+    name: "Done",
+    items: [],
+  },
 };

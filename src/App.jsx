@@ -2,31 +2,13 @@ import { useEffect, useState } from "react";
 import WebFont from "webfontloader";
 import Layout from "./components/Layout/Layout";
 import Topbar from "./components/organisms/Topbar/Topbar";
-import BoardSection from "./components/organisms/BoardSection/BoardSection";
 import styles from "./App.module.css";
-import {
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
-import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { arrayMove, insertAtIndex, removeAtIndex } from "./utils/array";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
+import { cols } from "./utils/array";
 
 function App() {
-  const [boardItems, setBoardItems] = useState({
-    todo: ["1", "2", "3"],
-    inProgress: ["4", "5", "6"],
-    done: ["7", "8", "9"],
-  });
-
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
+  const [columns, setColumns] = useState(cols);
 
   useEffect(() => {
     WebFont.load({
@@ -36,89 +18,45 @@ function App() {
     });
   }, []);
 
-  function handleDragOver({ over, active }) {
-    const overId = over?.id;
-    console.log("sdsd", active.data.current);
-    if (!overId) {
-      return;
-    }
+  function handleDragEnd(e) {
+    const { source, destination } = e;
+    if (!destination) return;
 
-    const activeContainer = active.data?.current?.sortable?.containerId;
-    const overContainer = over.data?.current?.sortable?.containerId;
-
-    if (!overContainer) {
-      return;
-    }
-
-    if (activeContainer !== overContainer) {
-      setBoardItems((items) => {
-        const activeIndex = active.data.current?.sortable?.index;
-        const overIndex = over.data.current?.sortable?.index || 0;
-
-        return moveBetweenContainers(
-          items,
-          activeContainer,
-          activeIndex,
-          overContainer,
-          overIndex,
-          active.id
-        );
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = columns[source.droppableId];
+      const destColumn = columns[destination.droppableId];
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems,
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems,
+        },
+      });
+    } else {
+      console.log("jo", source.droppableId);
+      const column = columns[source.droppableId];
+      const copiedItems = [...column.items];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...column,
+          items: copiedItems,
+        },
       });
     }
   }
 
-  function handleDragEnd({ active, over }) {
-    if (!over) {
-      return;
-    }
-
-    if (active.id !== over.id) {
-      const activeContainer = active.data.current?.sortable?.containerId;
-      const overContainer = over.data.current?.sortable?.containerId || over.id;
-      const activeIndex = active.data.current?.sortable?.index;
-      const overIndex = over.data.current?.sortable?.index || 0;
-
-      setBoardItems((items) => {
-        let newItems;
-        if (activeContainer === overContainer) {
-          newItems = {
-            ...items,
-            [overContainer]: arrayMove(
-              items[overContainer],
-              activeIndex,
-              overIndex
-            ),
-          };
-        } else {
-          newItems = moveBetweenContainers(
-            items,
-            activeContainer,
-            activeIndex,
-            overContainer,
-            overIndex,
-            active.id
-          );
-        }
-
-        return newItems;
-      });
-    }
-  }
-
-  function moveBetweenContainers(
-    items,
-    activeContainer,
-    activeIndex,
-    overContainer,
-    overIndex,
-    item
-  ) {
-    return {
-      ...items,
-      [activeContainer]: removeAtIndex(items[activeContainer], activeIndex),
-      [overContainer]: insertAtIndex(items[overContainer], overIndex, item),
-    };
-  }
+  console.log(columns);
 
   return (
     <Layout>
@@ -126,17 +64,55 @@ function App() {
       <div className={styles["app__container"]}>
         <p>Content header</p>
         <p>Filters and Share</p>
-        <DndContext
-          sensors={sensors}
-          onDragEnd={handleDragEnd}
-          onDragOver={handleDragOver}
-        >
+        <DragDropContext onDragEnd={handleDragEnd}>
           <div className={styles["app__board-container"]}>
-            {Object.keys(boardItems).map((group) => (
-              <BoardSection id={group} items={boardItems[group]} key={group} />
-            ))}
+            {Object.entries(columns).map(([id, colItem]) => {
+              return (
+                <Droppable droppableId={id} key={id}>
+                  {(provided, snapshot) => (
+                    <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      className={styles["app__board__boardsection"]}
+                    >
+                      {colItem.items?.map((item, index) => (
+                        <Draggable
+                          key={index}
+                          draggableId={item.id}
+                          index={index}
+                        >
+                          {(provided, snapshot) => {
+                            return (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={{
+                                  userSelect: "none",
+                                  padding: 16,
+                                  margin: "0 0 8px 0",
+                                  minHeight: "50px",
+                                  backgroundColor: snapshot.isDragging
+                                    ? "#263B4A"
+                                    : "#456C86",
+                                  color: "white",
+                                  ...provided.draggableProps.style,
+                                }}
+                              >
+                                {item.content}
+                              </div>
+                            );
+                          }}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              );
+            })}
           </div>
-        </DndContext>
+        </DragDropContext>
       </div>
     </Layout>
   );
