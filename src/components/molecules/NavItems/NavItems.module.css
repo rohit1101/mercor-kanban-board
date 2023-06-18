@@ -2,3 +2,19 @@
   display: flex;
   align-items: center;
 }
+
+.navitems--border {
+  width: 122px;
+  height: 40px;
+  border: 1px solid #787486;
+  border-radius: 6px;
+  padding: 12px 15px;
+}
+
+.navitems--border-sm {
+  width: 97px;
+  border: 1px solid #787486;
+  border-radius: 6px;
+  padding: 12px 15px;
+  height: 40px;
+}
