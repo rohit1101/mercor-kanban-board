@@ -1,0 +1,9 @@
+.app__container {
+  padding-inline: 48px;
+}
+
+.app__board-container {
+  padding-top: 42px;
+  display: flex;
+  gap: 14px;
+}

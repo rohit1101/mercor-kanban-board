@@ -1,0 +1,9 @@
+.boardsection {
+  /* display: flex; */
+  /* flex-direction: ; */
+  /* gap: 14px; */
+  width: 354px;
+  height: 625px;
+  background: #f5f5f5;
+  border-radius: 16px 16px 0px 0px;
+}
