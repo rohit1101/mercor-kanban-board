@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./NavItems.module.css";
 
 function NavItems(props) {
-  const { icon, text = "", alt = "" } = props;
+  const { icon, text = "", alt = "icon" } = props;
   return (
     <div
       className={`${styles["navitems"]} ${

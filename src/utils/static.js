@@ -7,6 +7,8 @@ import Members from "../assets/profile-2user.svg";
 import Calendar from "../assets/calendar-2.svg";
 import MessageQuestion from "../assets/message-question.svg";
 import Notification from "../assets/notification.svg";
+import Comment from "../assets/card-comment.svg";
+import Folder from "../assets/card-folder.svg";
 
 const Static = {
   sideBarNavItems: [
@@ -26,6 +28,20 @@ const Static = {
     { id: 10, icon: Calendar, title: "", alt: "calendar-icon" },
     { id: 11, icon: MessageQuestion, title: "", alt: "messages-question-icon" },
     { id: 12, icon: Notification, title: "", alt: "notification-icon" },
+  ],
+  cardNavItems: [
+    {
+      id: crypto.randomUUID(),
+      icon: Comment,
+      title: "14 comments",
+      alt: "comments-icon",
+    },
+    {
+      id: crypto.randomUUID(),
+      icon: Folder,
+      title: "15 files",
+      alt: "files-icon",
+    },
   ],
 };
 

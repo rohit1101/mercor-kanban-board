@@ -5,5 +5,5 @@
 
 .layout__child {
   flex-basis: 85%;
-  /* padding-inline: 48px; */
+  padding-bottom: 32px;
 }
