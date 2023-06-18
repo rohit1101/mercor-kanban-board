@@ -1,15 +1,13 @@
 import React from "react";
 import styles from "./InvitedUsers.module.css";
-import Static from "../../../utils/static";
 import First from "../../../assets/first.svg";
 import Second from "../../../assets/second.svg";
 import Third from "../../../assets/thir.svg";
 import Last from "../../../assets/last.svg";
 
-function InvitedUsers() {
+function InvitedUsers(props) {
   return (
-    <div className={styles["invited__user-container"]}>
-      {/* {Static.invitedUsers.map((image, idx) => ( */}
+    <div className={`${styles["invited__user-container"]} ${props.className}`}>
       <img
         className={`${styles["invited__user"]}`}
         src={First}
@@ -30,9 +28,10 @@ function InvitedUsers() {
         src={Last}
         alt="invited-user"
       />
-      {/* ))} */}
 
-      <div className={styles["invited__user-last"]}>+2</div>
+      {!props.className && (
+        <div className={`${styles["invited__user-last"]}`}>+2</div>
+      )}
     </div>
   );
 }
