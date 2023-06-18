@@ -165,6 +165,9 @@ function App() {
                             }`}
                           />
                           <p>{colItem.name}</p>
+                          <Badge className={styles["appbar__rounded-badge"]}>
+                            {colItem.items.length}
+                          </Badge>
                         </div>
                         {colItem.name === "To Do" && (
                           <NavItems alt="todo-icon" icon={Todo} />
